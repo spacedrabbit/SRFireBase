@@ -182,8 +182,14 @@ typedef BOOL (^SRVerificationBlock)(NSString *);
     self.loginButton = [[UIButton alloc] initWithFrame:CGRectZero];
     [self.createAccountButton setTitle:@"Create Account" forState:UIControlStateNormal];
     [self.loginButton setTitle:@"Login" forState:UIControlStateNormal];
-    [self.loginButton setBackgroundColor:[UIColor blueColor]];
-    [self.createAccountButton setBackgroundColor:[UIColor purpleColor]];
+    [self.loginButton setBackgroundColor:[UIColor srl_deeperBlue]];
+    [self.createAccountButton setBackgroundColor:[UIColor srl_deeperBlue]];
+    
+    [self.loginButton.layer setBorderColor:[UIColor srl_baseBeige].CGColor];
+    [self.loginButton.layer setBorderWidth:2.0];
+    
+    [self.createAccountButton.layer setBorderColor:[UIColor srl_baseBeige].CGColor];
+    [self.createAccountButton.layer setBorderWidth:2.0];
     
     [self.loginButton setTitleShadowColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
     [self.createAccountButton setTitleShadowColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
@@ -261,7 +267,7 @@ typedef BOOL (^SRVerificationBlock)(NSString *);
                                                                               views:signInPageUIElements]];
     
     // -- Container view -- //
-    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==20.0)-[icon(==iconSideSize)]-[username]-[password]-[login(==buttonHeight)]-[create(==buttonHeight)]"
+    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==20.0)-[icon(==iconSideSize)]-[username]-[password]-(==20)-[login(==buttonHeight)]-[create(==buttonHeight)]"
                                                                       options:NSLayoutFormatAlignAllCenterX
                                                                       metrics:sizeKeys
                                                                         views:signInPageUIElements]];
@@ -293,8 +299,21 @@ typedef BOOL (^SRVerificationBlock)(NSString *);
 }
 
 -(BOOL)textFieldShouldClear:(UITextField *)textField{
-    textField.text = @"";
-    return YES;
+    if ([textField.text isEqualToString:@"username"] || [textField.text isEqualToString:@"password"]) {
+        return YES;
+    }else if([textField.text isEqualToString:@""]){
+        [self restorePlaceholderText:textField];
+    }
+    return NO;
+}
+
+-(void)restorePlaceholderText:(UITextField *)textfield{
+    if ([textfield isEqual:self.usernameField]) {
+        textfield.placeholder = @"username";
+    }
+    if ([textfield isEqual:self.passwordField]){
+        textfield.placeholder = @"password";
+    }
 }
 
 -(BOOL)prefersStatusBarHidden{
@@ -326,7 +345,7 @@ typedef BOOL (^SRVerificationBlock)(NSString *);
         NSValue * keyboardKVCValue = [userInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
         CGRect keyboardFrameFromKVCValue = [keyboardKVCValue CGRectValue];
         
-        [self.scrollView setContentOffset:CGPointMake(0, keyboardFrameFromKVCValue.size.height * .5) animated:YES];
+        [self.scrollView setContentOffset:CGPointMake(0, keyboardFrameFromKVCValue.size.height * .35) animated:YES];
         
     }else if( [keyboardNotification.name isEqualToString:UIKeyboardDidHideNotification]){
         [self.scrollView setContentOffset:CGPointMake(0.0, -64.0) animated:YES];

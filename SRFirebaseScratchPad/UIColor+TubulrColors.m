@@ -78,9 +78,12 @@
                            green:127.0/255.0
                             blue:102.0/255.0
                            alpha:1.0];
-
-    
     
 }
-
++(UIColor *)srl_deeperBlue{
+    return [UIColor colorWithRed:33.0/255.0
+                           green:133.0/255.0
+                            blue:197.0/255.0
+                           alpha:1.0];
+}
 @end

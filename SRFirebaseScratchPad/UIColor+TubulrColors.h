@@ -21,5 +21,6 @@
 
 + (UIColor *)srl_baseBeige;
 + (UIColor *)srl_navBarPink;
++ (UIColor *)srl_deeperBlue;
 
 @end
