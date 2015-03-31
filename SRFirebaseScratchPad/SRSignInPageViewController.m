@@ -82,37 +82,53 @@ typedef BOOL (^SRVerificationBlock)(NSString *);
 }
 
 #pragma mark - Some Text Field Validation
-- (BOOL)validateUserName{
+- (void)validateUserName:(void(^)(BOOL))success{
     
     __block NSString * usernameToValidate = self.usernameField.text.copy;
+    __block SRVerificationBlock userNameIsUnique;
+    BOOL usernameIsAtLeast6Characters = usernameToValidate.length >= 6;
     
-    SRVerificationBlock usernameIsAtLeast6Characters = ^BOOL(NSString * string){
-        return string.length >= 6;
-    };
-    
-    SRVerificationBlock usernameIsUnique = ^BOOL(NSString * string){
-
+    /* Note to future self if I ever go through this code again:
+     *  Yes, I realise that I'm making this validation logic unnecessarily complicated
+     *  There is no real reason to nest in all of these blocks, nor is it necessary to
+     *  perform this crazy optimized search on such a small DB for such a simple check. 
+     *  I did it because I felt like it, and I was bored. 
+     *  Also, nesting the Parse call -[PFQuery findObjectsInBackgroundWithBlock:] inside of a block
+     *  (in this case it originally was in an SRVerificationBlock) resulted in a warning 
+     *  to the tune of "a long running operation has been added to the main queue". So, 
+     *  in an effort to squelch this error, I decided to take a roundabout academic approach and
+     *  redesigned this method to mirror what I may actually ahve to do if optimization
+     *  was a factor. 
+     *  
+     *  As such, this code is more difficult to read than the method's functions may imply.
+     */
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        
         PFQuery * searchForExistingNameQuery = [PFQuery queryWithClassName:kSRUserClass];
         [searchForExistingNameQuery fromLocalDatastore];
-        NSArray * locatedUsers = [searchForExistingNameQuery findObjects];
-        
-        for (PFObject * userObject in locatedUsers) {
-            if ([userObject[@"name"] isEqualToString:string]) {
-                return NO;
+        [searchForExistingNameQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            
+            if (objects) {
+                userNameIsUnique = ^BOOL(NSString * string){
+                    
+                    for (PFObject * userObject in objects) {
+                        if ([userObject[@"name"] isEqualToString:string]) {
+                            return NO;
+                        }
+                    }
+                    return YES;
+                };
             }
-        }
-        return YES;
-    };
-    
-    return usernameIsAtLeast6Characters(usernameToValidate) && usernameIsUnique(usernameToValidate);
+            
+            success(userNameIsUnique(usernameToValidate) && usernameIsAtLeast6Characters);
+        }];
+    });
 }
 
 - (BOOL)validatePasswordEntry{
     
     NSString * passwordEntry = self.passwordField.text;
-    SRVerificationBlock hasAtLeast8Characters = ^BOOL(NSString *string){
-        return string.length >= 8;
-    };
+    BOOL hasAtLeast8Characters = passwordEntry.length >= 8;
     
     SRVerificationBlock hasAtLeast1NonAlphaNumberic = ^BOOL(NSString *string){
         NSCharacterSet * nonAlphaSet = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
@@ -128,7 +144,7 @@ typedef BOOL (^SRVerificationBlock)(NSString *);
         return uppercaseRange.location == NSNotFound ? NO : YES;
     };
     
-    BOOL final = hasAtLeast8Characters(passwordEntry)
+    BOOL final = hasAtLeast8Characters
                     && hasAtLeast1NonAlphaNumberic(passwordEntry)
                     && hasAtLeast1UpperCase(passwordEntry);
 
@@ -150,20 +166,24 @@ typedef BOOL (^SRVerificationBlock)(NSString *);
 
 - (void)createAccount:(id) sender{
     
-    if ([self validatePasswordEntry] && [self validateUserName]) {
-        PFObject * newUser = [PFObject objectWithClassName:kSRUserClass dictionary:@{@"name" : self.usernameField.text ,
-                                                                                     @"password" : self.passwordField.text }];
+    [self validateUserName:^(BOOL success){
         
-        [newUser pinInBackgroundWithName:@"adminAdd" block:^(BOOL succeeded, NSError *error) {
-            if (succeeded) {
-                NSLog(@"User saved as: %@   --  %@", newUser[@"name"], newUser[@"password"]);
-            }
-         }];
-
-    }
-    else{
-        NSLog(@"New user not valid");
-    }
+        BOOL validPassword = [self validatePasswordEntry];
+        if (success && validPassword) {
+            
+            PFObject * newUser = [PFObject objectWithClassName:kSRUserClass dictionary:@{@"name" : self.usernameField.text ,
+                                                                                         @"password" : self.passwordField.text }];
+            
+            [newUser pinInBackgroundWithName:@"adminAdd" block:^(BOOL succeeded, NSError *error) {
+                if (succeeded) {
+                    NSLog(@"User saved as: %@   --  %@", newUser[@"name"], newUser[@"password"]);
+                }
+            }];
+        }else{
+            NSLog(@"New user not valid");
+        }
+        
+    }];
 }
 
 #pragma mark - Views Setup
