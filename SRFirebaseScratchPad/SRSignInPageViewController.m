@@ -151,14 +151,24 @@ typedef BOOL (^SRVerificationBlock)(NSString *);
     return final;
 }
 
+#pragma mark - Login / Create Account button logic
+
 - (void)logInUser:(id) sender{
    
+    __block NSString * usernameEntry = self.usernameField.text.copy;
+    __block NSString * passwordEntry = self.passwordField.text.copy;
+    
     PFQuery * lookForUser = [PFQuery queryWithClassName:kSRUserClass];
     [lookForUser fromLocalDatastore];
     
     [lookForUser findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
-            NSLog(@"All things: %@", objects);
+            for (PFObject * userObject in objects) {
+                if ([userObject[@"name"] isEqualToString:usernameEntry] &&
+                    [userObject[@"password"] isEqualToString:passwordEntry]) {
+                    NSLog(@"User found and authenticated");
+                }
+            }
         }
     }];
     
