@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1438BE061ACB94840029811A /* SRFireBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1438BE051ACB94840029811A /* SRFireBaseTableViewController.m */; };
+		1438BE0A1ACBA4EC0029811A /* SRCatChatTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1438BE091ACBA4EC0029811A /* SRCatChatTableViewController.m */; };
 		146C29211AC8F51300555E8E /* UIColor+TubulrColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 146C29201AC8F51300555E8E /* UIColor+TubulrColors.m */; };
 		149E68461AC8A1F70023D8F0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E68451AC8A1F70023D8F0 /* main.m */; };
 		149E68491AC8A1F70023D8F0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E68481AC8A1F70023D8F0 /* AppDelegate.m */; };
@@ -35,6 +36,8 @@
 /* Begin PBXFileReference section */
 		1438BE041ACB94840029811A /* SRFireBaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SRFireBaseTableViewController.h; path = ../SRFireBaseTableViewController.h; sourceTree = "<group>"; };
 		1438BE051ACB94840029811A /* SRFireBaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SRFireBaseTableViewController.m; path = ../SRFireBaseTableViewController.m; sourceTree = "<group>"; };
+		1438BE081ACBA4EC0029811A /* SRCatChatTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SRCatChatTableViewController.h; path = ../SRCatChatTableViewController.h; sourceTree = "<group>"; };
+		1438BE091ACBA4EC0029811A /* SRCatChatTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SRCatChatTableViewController.m; path = ../SRCatChatTableViewController.m; sourceTree = "<group>"; };
 		146C291F1AC8F51300555E8E /* UIColor+TubulrColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+TubulrColors.h"; sourceTree = "<group>"; };
 		146C29201AC8F51300555E8E /* UIColor+TubulrColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+TubulrColors.m"; sourceTree = "<group>"; };
 		149E68401AC8A1F70023D8F0 /* SRFirebaseScratchPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SRFirebaseScratchPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,6 +90,15 @@
 			name = "App Delegate";
 			sourceTree = "<group>";
 		};
+		1438BE0B1ACBA4F90029811A /* Old UI (For Reference, Delete Later) */ = {
+			isa = PBXGroup;
+			children = (
+				149E686B1AC8B4D00023D8F0 /* SRSignInPageViewController.h */,
+				149E686C1AC8B4D00023D8F0 /* SRSignInPageViewController.m */,
+			);
+			name = "Old UI (For Reference, Delete Later)";
+			sourceTree = "<group>";
+		};
 		149E68371AC8A1F70023D8F0 = {
 			isa = PBXGroup;
 			children = (
@@ -113,8 +125,9 @@
 				1438BE071ACBA1070029811A /* App Delegate */,
 				1438BE041ACB94840029811A /* SRFireBaseTableViewController.h */,
 				1438BE051ACB94840029811A /* SRFireBaseTableViewController.m */,
-				149E686B1AC8B4D00023D8F0 /* SRSignInPageViewController.h */,
-				149E686C1AC8B4D00023D8F0 /* SRSignInPageViewController.m */,
+				1438BE081ACBA4EC0029811A /* SRCatChatTableViewController.h */,
+				1438BE091ACBA4EC0029811A /* SRCatChatTableViewController.m */,
+				1438BE0B1ACBA4F90029811A /* Old UI (For Reference, Delete Later) */,
 				149E68431AC8A1F70023D8F0 /* Supporting Files */,
 			);
 			path = SRFirebaseScratchPad;
@@ -313,6 +326,7 @@
 				149E68461AC8A1F70023D8F0 /* main.m in Sources */,
 				149E686D1AC8B4D00023D8F0 /* SRSignInPageViewController.m in Sources */,
 				1438BE061ACB94840029811A /* SRFireBaseTableViewController.m in Sources */,
+				1438BE0A1ACBA4EC0029811A /* SRCatChatTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
