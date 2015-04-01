@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "UIColor+TubulrColors.h"
 #import "SRSignInPageViewController.h"
+#import "SRFireBaseTableViewController.h"
 
 @interface AppDelegate ()
 
@@ -25,8 +26,9 @@
                   clientKey:@"MuBnXq8DIpKOCqew9IItp3W32bmMrDClUN6pS7zi"];
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    SRSignInPageViewController * topViewController = [[SRSignInPageViewController alloc] init];
+    //SRSignInPageViewController * topViewController = [[SRSignInPageViewController alloc] init];
     
+    SRFireBaseTableViewController * topViewController = [[SRFireBaseTableViewController alloc] initWithStyle:UITableViewStylePlain];
     UINavigationController * rootVC = [[UINavigationController alloc] initWithRootViewController:topViewController];
     [rootVC setAutomaticallyAdjustsScrollViewInsets:YES];
     [rootVC setDefinesPresentationContext:YES];

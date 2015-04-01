@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1438BE061ACB94840029811A /* SRFireBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1438BE051ACB94840029811A /* SRFireBaseTableViewController.m */; };
 		146C29211AC8F51300555E8E /* UIColor+TubulrColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 146C29201AC8F51300555E8E /* UIColor+TubulrColors.m */; };
 		149E68461AC8A1F70023D8F0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E68451AC8A1F70023D8F0 /* main.m */; };
 		149E68491AC8A1F70023D8F0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E68481AC8A1F70023D8F0 /* AppDelegate.m */; };
-		149E684C1AC8A1F70023D8F0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E684B1AC8A1F70023D8F0 /* ViewController.m */; };
 		149E684F1AC8A1F70023D8F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 149E684D1AC8A1F70023D8F0 /* Main.storyboard */; };
 		149E68511AC8A1F70023D8F0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 149E68501AC8A1F70023D8F0 /* Images.xcassets */; };
 		149E68541AC8A1F70023D8F0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 149E68521AC8A1F70023D8F0 /* LaunchScreen.xib */; };
@@ -33,6 +33,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1438BE041ACB94840029811A /* SRFireBaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SRFireBaseTableViewController.h; path = ../SRFireBaseTableViewController.h; sourceTree = "<group>"; };
+		1438BE051ACB94840029811A /* SRFireBaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SRFireBaseTableViewController.m; path = ../SRFireBaseTableViewController.m; sourceTree = "<group>"; };
 		146C291F1AC8F51300555E8E /* UIColor+TubulrColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+TubulrColors.h"; sourceTree = "<group>"; };
 		146C29201AC8F51300555E8E /* UIColor+TubulrColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+TubulrColors.m"; sourceTree = "<group>"; };
 		149E68401AC8A1F70023D8F0 /* SRFirebaseScratchPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SRFirebaseScratchPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -40,8 +42,6 @@
 		149E68451AC8A1F70023D8F0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		149E68471AC8A1F70023D8F0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		149E68481AC8A1F70023D8F0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		149E684A1AC8A1F70023D8F0 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		149E684B1AC8A1F70023D8F0 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		149E684E1AC8A1F70023D8F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		149E68501AC8A1F70023D8F0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		149E68531AC8A1F70023D8F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -78,6 +78,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1438BE071ACBA1070029811A /* App Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				149E68471AC8A1F70023D8F0 /* AppDelegate.h */,
+				149E68481AC8A1F70023D8F0 /* AppDelegate.m */,
+			);
+			name = "App Delegate";
+			sourceTree = "<group>";
+		};
 		149E68371AC8A1F70023D8F0 = {
 			isa = PBXGroup;
 			children = (
@@ -101,16 +110,11 @@
 		149E68421AC8A1F70023D8F0 /* SRFirebaseScratchPad */ = {
 			isa = PBXGroup;
 			children = (
-				149E68471AC8A1F70023D8F0 /* AppDelegate.h */,
-				149E68481AC8A1F70023D8F0 /* AppDelegate.m */,
+				1438BE071ACBA1070029811A /* App Delegate */,
+				1438BE041ACB94840029811A /* SRFireBaseTableViewController.h */,
+				1438BE051ACB94840029811A /* SRFireBaseTableViewController.m */,
 				149E686B1AC8B4D00023D8F0 /* SRSignInPageViewController.h */,
 				149E686C1AC8B4D00023D8F0 /* SRSignInPageViewController.m */,
-				149E68701AC8B8730023D8F0 /* hungryCat.png */,
-				149E684A1AC8A1F70023D8F0 /* ViewController.h */,
-				149E684B1AC8A1F70023D8F0 /* ViewController.m */,
-				149E684D1AC8A1F70023D8F0 /* Main.storyboard */,
-				149E68501AC8A1F70023D8F0 /* Images.xcassets */,
-				149E68521AC8A1F70023D8F0 /* LaunchScreen.xib */,
 				149E68431AC8A1F70023D8F0 /* Supporting Files */,
 			);
 			path = SRFirebaseScratchPad;
@@ -119,6 +123,10 @@
 		149E68431AC8A1F70023D8F0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				149E684D1AC8A1F70023D8F0 /* Main.storyboard */,
+				149E68501AC8A1F70023D8F0 /* Images.xcassets */,
+				149E68521AC8A1F70023D8F0 /* LaunchScreen.xib */,
+				149E68701AC8B8730023D8F0 /* hungryCat.png */,
 				146C291F1AC8F51300555E8E /* UIColor+TubulrColors.h */,
 				146C29201AC8F51300555E8E /* UIColor+TubulrColors.m */,
 				149E68441AC8A1F70023D8F0 /* Info.plist */,
@@ -301,10 +309,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				146C29211AC8F51300555E8E /* UIColor+TubulrColors.m in Sources */,
-				149E684C1AC8A1F70023D8F0 /* ViewController.m in Sources */,
 				149E68491AC8A1F70023D8F0 /* AppDelegate.m in Sources */,
 				149E68461AC8A1F70023D8F0 /* main.m in Sources */,
 				149E686D1AC8B4D00023D8F0 /* SRSignInPageViewController.m in Sources */,
+				1438BE061ACB94840029811A /* SRFireBaseTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
