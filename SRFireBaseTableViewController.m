@@ -9,8 +9,11 @@
 #import <Parse/Parse.h>
 #import "UIColor+TubulrColors.h"
 #import "SRFireBaseTableViewController.h"
+#import "SRCatChatTableViewController.h"
 
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
+#define IN_DEBUG YES
+
 static NSString * const kSRUserClass = @"users";
 static NSString * const kSRAdminClass = @"admins";
 static NSString * const kSRHeroImageCell = @"heroCell";
@@ -139,6 +142,10 @@ typedef BOOL (^SRVerificationBlock)(NSString *);
     __block NSString * usernameEntry = self.usernameField.text.copy;
     __block NSString * passwordEntry = self.passwordField.text.copy;
     
+#ifdef IN_DEBUG
+    SRCatChatTableViewController * catChat = [[SRCatChatTableViewController alloc] init];
+    [self.navigationController pushViewController:catChat animated:YES];
+#else
     PFQuery * lookForUser = [PFQuery queryWithClassName:kSRUserClass];
     [lookForUser fromLocalDatastore];
     
@@ -148,10 +155,15 @@ typedef BOOL (^SRVerificationBlock)(NSString *);
                 if ([userObject[@"name"] isEqualToString:usernameEntry] &&
                     [userObject[@"password"] isEqualToString:passwordEntry]) {
                     NSLog(@"User found and authenticated");
+                    
+                    SRCatChatTableViewController * catChat = [[SRCatChatTableViewController alloc] init];
+                    [self.navigationController pushViewController:catChat animated:YES];
+                    
                 }
             }
         }
     }];
+#endif
     
 }
 

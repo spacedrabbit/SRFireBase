@@ -8,6 +8,9 @@
 
 #import "SRCatChatTableViewController.h"
 #import "UIColor+TubulrColors.h"
+#import <VBFPopFlatButton/VBFPopFlatButton.h>
+
+#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 
 static NSUInteger maximumMarginFromTextBubbleToEdge = .25;
 static NSString * const kSRChatBubbleCellIdentifier = @"chatBubbleCell";
@@ -36,11 +39,6 @@ static NSUInteger maximumHeightForChatTextField = 88.0;
 
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -48,39 +46,98 @@ static NSUInteger maximumHeightForChatTextField = 88.0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
     return self.numberOfMessagesInRecentHistory > 0 ? self.numberOfMessagesInRecentHistory : 1;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kSRChatBubbleCellIdentifier];
+    if (!cell) {
+        cell = [self createChatCellWithMessage:@"Test"];
+    }
     
     return cell;
-}*/
+}
 
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    UIView * footer;
+    if (section == 0) {
+        footer = [self createChatTextField];
+    }
+    return footer;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return minimumHeightForChatTextField;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return minimumHeightForChatTextField;
+}
+
+#pragma mark - Cell Creation
 
 - (UITableViewCell *)createChatCellWithMessage:(NSString *)message {
     UITableViewCell * cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kSRChatBubbleCellIdentifier];
+    [cell setBackgroundColor:[UIColor srl_baseBeige]];
+    cell.contentView.backgroundColor = [UIColor srl_baseBeige];
+    cell.textLabel.text = message;
     
     return cell;
 }
 
 - (UITableViewHeaderFooterView *)createChatTextField{
     UITableViewHeaderFooterView *chatTextFieldFooter = [[UITableViewHeaderFooterView alloc] initWithReuseIdentifier: kSRChatTextFieldCellIdentifier];
-    chatTextFieldFooter.backgroundColor = [UIColor srl_textFieldLightGrayColor];
-
+    chatTextFieldFooter.contentView.backgroundColor = [UIColor srl_textFieldLightGrayColor];
+    [chatTextFieldFooter setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
     UITextField *chatTextField = [[UITextField alloc] initWithFrame:CGRectZero];
     [chatTextField setBorderStyle:UITextBorderStyleBezel];
+    [chatTextField setTranslatesAutoresizingMaskIntoConstraints:NO];
     chatTextField.placeholder = @"Meoowww?";
     
+    UIImageView * catIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fishbone"]];
+    [catIcon setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [catIcon setFrame:[chatTextField leftViewRectForBounds:chatTextField.bounds]];
+    [chatTextField setLeftViewMode:UITextFieldViewModeAlways];
+    [chatTextField setLeftView:catIcon];
+    
+    VBFPopFlatButton * sendButton = [[VBFPopFlatButton alloc] initWithFrame:CGRectZero buttonType:buttonAddType buttonStyle:buttonPlainStyle animateToInitialState:NO];
+    [sendButton setLineThickness:2.0];
+    [sendButton setTintColor:[UIColor srl_linkNormalOrangeColor] forState:UIControlStateNormal];
+    [sendButton setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [sendButton addTarget:self action:@selector(sendMessageTapped:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [chatTextFieldFooter.contentView addSubview:chatTextField];
+    [chatTextFieldFooter.contentView addSubview:sendButton];
+    
+    NSDictionary * viewsDictionary = NSDictionaryOfVariableBindings(chatTextField, chatTextFieldFooter, sendButton, catIcon);
+    NSDictionary * viewMetrics = @{ @"screenWidth" : @(SCREEN_WIDTH),
+                                    @"cellHeight" : @(minimumHeightForChatTextField),
+                                    @"buttonSize" : @(44.0)
+                                   };
+    
+    [chatTextFieldFooter.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[chatTextField]-[sendButton(==buttonSize)]-|"
+                                                                                            options:0
+                                                                                            metrics:viewMetrics
+                                                                                              views:viewsDictionary]];
+    [chatTextFieldFooter.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[chatTextField]-|"
+                                                                                            options:0
+                                                                                            metrics:viewMetrics
+                                                                                              views:viewsDictionary]];
+    [chatTextFieldFooter.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[sendButton(==buttonSize)]|"
+                                                                                            options:0
+                                                                                            metrics:viewMetrics
+                                                                                              views:viewsDictionary]];
     
     
-    
+
     return chatTextFieldFooter;
+}
+
+-(void)sendMessageTapped:(VBFPopFlatButton *)buttonSender{
+    [buttonSender animateToType:buttonUpBasicType];
+    
 }
 
 @end

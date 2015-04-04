@@ -1,13 +1,19 @@
 PODS:
   - Bolts (1.1.4)
-  - Parse (1.7.0):
+  - Parse (1.7.1):
     - Bolts (~> 1.1)
+  - pop (1.0.7)
+  - VBFPopFlatButton (0.0.6):
+    - pop
 
 DEPENDENCIES:
   - Parse (~> 1.7)
+  - VBFPopFlatButton
 
 SPEC CHECKSUMS:
   Bolts: f8e2f94edbf9fec7bb8de5ecaaa3aa6b7de6f64e
-  Parse: 3c2d4e6ade7b59d31c0bc8106340c6b81b31bc0f
+  Parse: fa8ec29de6d82035635986c11946299fb1b38316
+  pop: 628ffc631644601567ee8bfaaaea493ebd7d0923
+  VBFPopFlatButton: 782344da63f104c279a857d806e065117a7e1196
 
 COCOAPODS: 0.35.0
