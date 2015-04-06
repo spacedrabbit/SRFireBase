@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1438BE061ACB94840029811A /* SRFireBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1438BE051ACB94840029811A /* SRFireBaseTableViewController.m */; };
 		1438BE0A1ACBA4EC0029811A /* SRCatChatTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1438BE091ACBA4EC0029811A /* SRCatChatTableViewController.m */; };
+		145371501AD2396A0058AB83 /* paw_64x64.png in Resources */ = {isa = PBXBuildFile; fileRef = 1453714F1AD2396A0058AB83 /* paw_64x64.png */; };
 		146C29211AC8F51300555E8E /* UIColor+TubulrColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 146C29201AC8F51300555E8E /* UIColor+TubulrColors.m */; };
 		149E68461AC8A1F70023D8F0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E68451AC8A1F70023D8F0 /* main.m */; };
 		149E68491AC8A1F70023D8F0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E68481AC8A1F70023D8F0 /* AppDelegate.m */; };
@@ -38,6 +39,7 @@
 		1438BE051ACB94840029811A /* SRFireBaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SRFireBaseTableViewController.m; path = ../SRFireBaseTableViewController.m; sourceTree = "<group>"; };
 		1438BE081ACBA4EC0029811A /* SRCatChatTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SRCatChatTableViewController.h; path = ../SRCatChatTableViewController.h; sourceTree = "<group>"; };
 		1438BE091ACBA4EC0029811A /* SRCatChatTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SRCatChatTableViewController.m; path = ../SRCatChatTableViewController.m; sourceTree = "<group>"; };
+		1453714F1AD2396A0058AB83 /* paw_64x64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = paw_64x64.png; path = ../paw_64x64.png; sourceTree = "<group>"; };
 		146C291F1AC8F51300555E8E /* UIColor+TubulrColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+TubulrColors.h"; sourceTree = "<group>"; };
 		146C29201AC8F51300555E8E /* UIColor+TubulrColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+TubulrColors.m"; sourceTree = "<group>"; };
 		149E68401AC8A1F70023D8F0 /* SRFirebaseScratchPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SRFirebaseScratchPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,6 +163,7 @@
 		149E685D1AC8A1F70023D8F0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1453714F1AD2396A0058AB83 /* paw_64x64.png */,
 				149E685E1AC8A1F70023D8F0 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -269,6 +272,7 @@
 			files = (
 				149E684F1AC8A1F70023D8F0 /* Main.storyboard in Resources */,
 				149E68711AC8B8730023D8F0 /* hungryCat.png in Resources */,
+				145371501AD2396A0058AB83 /* paw_64x64.png in Resources */,
 				149E68541AC8A1F70023D8F0 /* LaunchScreen.xib in Resources */,
 				149E68511AC8A1F70023D8F0 /* Images.xcassets in Resources */,
 			);

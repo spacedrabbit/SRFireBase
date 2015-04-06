@@ -94,14 +94,7 @@ static NSUInteger maximumHeightForChatTextField = 88.0;
     [chatTextField setBorderStyle:UITextBorderStyleBezel];
     [chatTextField setTranslatesAutoresizingMaskIntoConstraints:NO];
     chatTextField.placeholder = @"Meoowww?";
-    
-//    UIImageView * catIcon = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 44.0, 44.0)];
-//    [catIcon setAutoresizesSubviews:YES];
-//    [catIcon setImage:[UIImage imageNamed:@"fishbone"]];
-//    [catIcon setTranslatesAutoresizingMaskIntoConstraints:NO];
-//    [chatTextField setLeftViewMode:UITextFieldViewModeAlways];
-//    [chatTextField setLeftView:catIcon];
-    
+
     VBFPopFlatButton * sendButton = [[VBFPopFlatButton alloc] initWithFrame:CGRectZero buttonType:buttonAddType buttonStyle:buttonPlainStyle animateToInitialState:NO];
     [sendButton setLineThickness:2.0];
     [sendButton setTintColor:[UIColor srl_linkNormalOrangeColor] forState:UIControlStateNormal];
