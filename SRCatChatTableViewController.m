@@ -88,19 +88,19 @@ static NSUInteger maximumHeightForChatTextField = 88.0;
 
 - (UITableViewHeaderFooterView *)createChatTextField{
     UITableViewHeaderFooterView *chatTextFieldFooter = [[UITableViewHeaderFooterView alloc] initWithReuseIdentifier: kSRChatTextFieldCellIdentifier];
-    chatTextFieldFooter.contentView.backgroundColor = [UIColor srl_textFieldLightGrayColor];
-    [chatTextFieldFooter setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [chatTextFieldFooter.contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
     
     UITextField *chatTextField = [[UITextField alloc] initWithFrame:CGRectZero];
     [chatTextField setBorderStyle:UITextBorderStyleBezel];
     [chatTextField setTranslatesAutoresizingMaskIntoConstraints:NO];
     chatTextField.placeholder = @"Meoowww?";
     
-    UIImageView * catIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fishbone"]];
-    [catIcon setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [catIcon setFrame:[chatTextField leftViewRectForBounds:chatTextField.bounds]];
-    [chatTextField setLeftViewMode:UITextFieldViewModeAlways];
-    [chatTextField setLeftView:catIcon];
+//    UIImageView * catIcon = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 44.0, 44.0)];
+//    [catIcon setAutoresizesSubviews:YES];
+//    [catIcon setImage:[UIImage imageNamed:@"fishbone"]];
+//    [catIcon setTranslatesAutoresizingMaskIntoConstraints:NO];
+//    [chatTextField setLeftViewMode:UITextFieldViewModeAlways];
+//    [chatTextField setLeftView:catIcon];
     
     VBFPopFlatButton * sendButton = [[VBFPopFlatButton alloc] initWithFrame:CGRectZero buttonType:buttonAddType buttonStyle:buttonPlainStyle animateToInitialState:NO];
     [sendButton setLineThickness:2.0];
@@ -111,21 +111,25 @@ static NSUInteger maximumHeightForChatTextField = 88.0;
     [chatTextFieldFooter.contentView addSubview:chatTextField];
     [chatTextFieldFooter.contentView addSubview:sendButton];
     
-    NSDictionary * viewsDictionary = NSDictionaryOfVariableBindings(chatTextField, chatTextFieldFooter, sendButton, catIcon);
+    NSDictionary * viewsDictionary = NSDictionaryOfVariableBindings(chatTextField, chatTextFieldFooter, sendButton);
     NSDictionary * viewMetrics = @{ @"screenWidth" : @(SCREEN_WIDTH),
                                     @"cellHeight" : @(minimumHeightForChatTextField),
                                     @"buttonSize" : @(44.0)
                                    };
     
+    NSDictionary * footViewDictionary = @{ @"content": chatTextFieldFooter.contentView};
+    [chatTextFieldFooter addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[content]|" options:0 metrics:nil views:footViewDictionary]];
+    [chatTextFieldFooter addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[content]|" options:0 metrics:nil views:footViewDictionary]];
+    
     [chatTextFieldFooter.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[chatTextField]-[sendButton(==buttonSize)]-|"
-                                                                                            options:0
+                                                                                            options:NSLayoutFormatAlignAllCenterY
                                                                                             metrics:viewMetrics
                                                                                               views:viewsDictionary]];
     [chatTextFieldFooter.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[chatTextField]-|"
                                                                                             options:0
                                                                                             metrics:viewMetrics
                                                                                               views:viewsDictionary]];
-    [chatTextFieldFooter.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[sendButton(==buttonSize)]|"
+    [chatTextFieldFooter.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[sendButton(==buttonSize)]"
                                                                                             options:0
                                                                                             metrics:viewMetrics
                                                                                               views:viewsDictionary]];
