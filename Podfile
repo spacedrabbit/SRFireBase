@@ -5,6 +5,7 @@ target 'SRFirebaseScratchPad' do
 
 pod 'Parse', '~> 1.7'
 pod 'VBFPopFlatButton'
+pod 'AFNetworking'
 
 end
 
